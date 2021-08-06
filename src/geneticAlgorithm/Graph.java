@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class Graph {
 	private Map<Vertex, List<Vertex>> adjVertices;
@@ -998,20 +997,6 @@ public class Graph {
 	public List<List<Vertex>> getEdges() {
 		Collection<List<Vertex>> values = this.adjVertices.values();
 		return new ArrayList<List<Vertex>>(values);
-//		return (List<List<Vertex>>) values;
-//		List<List<Vertex>> a = new ArrayList<List<Vertex>>();
-//		Set<Vertex> keySet = this.adjVertices.keySet();
-//		keySet.forEach(key -> {
-//			this.adjVertices.get(key).stream().forEach(ver -> {
-//				if (ver != null) {
-//					ArrayList<Vertex> array = new ArrayList<Vertex>();
-//					array.add(key);
-//					array.add(ver);
-//					a.add(array);
-//				}
-//			});
-//		});
-//		return a;
 	}
 	
 	public int getVertexIndex(Vertex vertex) {
@@ -1057,5 +1042,4 @@ class Vertex {
 		return true;
 	}
 
-	// equals and hashCode
 }

@@ -18,7 +18,7 @@ public class oneAbnormalEdge implements GeneticAlgorithm {
 		}
 		List<Solution> solutions = createCollectionOfSolutions(30, g);
 		return findBestSolution(g, solutions);
-	} 
+	}
 
 	@Override
 	public List<Solution> createCollectionOfSolutions(int solutionsSize, Graph g) {
@@ -49,14 +49,17 @@ public class oneAbnormalEdge implements GeneticAlgorithm {
 		int rate = 0;
 		List<List<Vertex>> edges = g.getEdges();
 		for (List<Vertex> edge : edges) {
-			int vertexIndex = g.getVertexIndex(edge.get(0));
-			int integer2 = fitness.get(vertexIndex);
-			int integer = fitness.get(g.getVertexIndex(edge.get(1)));
-			if (isColorEqual(integer2, integer)) {
-				rate++;
+			if (edge.size() >= 2) {
+				int vertexIndex = g.getVertexIndex(edge.get(0));
+				int integer2 = fitness.get(vertexIndex);
+				vertexIndex = g.getVertexIndex(edge.get(1));
+				int integer = fitness.get(g.getVertexIndex(edge.get(1)));
+				if (isColorEqual(integer2, integer)) {
+					rate++;
+				}
 			}
 		}
-		return rate == 0 ? Integer.MAX_VALUE : rate;
+		return Math.abs(rate - 1);
 	}
 
 	public boolean isColorEqual(int colorOne, int colorTwo) {
@@ -69,7 +72,7 @@ public class oneAbnormalEdge implements GeneticAlgorithm {
 
 	@Override
 	public Solution findBestSolution(Graph g, List<Solution> fitness) {
-		assert g != null && fitness != null && fitness.size() == g.verticesSize(): "";
+		assert g != null && fitness != null && fitness.size() == g.verticesSize() : "";
 		for (int iteration = 0; stopCondition(iteration); iteration++) {
 			if (isTargetSolution(fitness)) {
 				return fitness.get(0);
@@ -85,7 +88,7 @@ public class oneAbnormalEdge implements GeneticAlgorithm {
 	@Override
 	public boolean isTargetSolution(List<Solution> fitness) {
 		assert fitness != null && fitness.size() > 0;
-		if (fitness.get(0).getScore() == 1) {
+		if (fitness.get(0).getScore() == 0) {
 			System.out.println(fitness.get(0).toString());
 			return true;
 		}

@@ -5,6 +5,6 @@ public class ActivateGeneticAlgorithm {
 		Graph g = new Graph().createGraph();
 		Solution bestSolution = new oneAbnormalEdge().getBestSolution(g);
 		
-		System.out.println(bestSolution.toString());	
+		System.out.println(bestSolution.getScore());	
 	}
 }
